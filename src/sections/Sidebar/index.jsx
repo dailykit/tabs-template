@@ -19,8 +19,9 @@ const Sidebar = ({ visible, toggleSidebar }) => {
       toggleSidebar(!visible)
       dispatch({
          type: 'ADD_TAB',
-         payload: { title, path, history },
+         payload: { title, path },
       })
+      history.push(path)
    }
    return (
       <StyledSidebar visible={visible}>

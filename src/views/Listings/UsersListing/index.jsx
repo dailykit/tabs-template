@@ -10,8 +10,9 @@ const UsersListing = () => {
       const hash = `untitled${uuid().split('-')[0]}`
       dispatch({
          type: 'ADD_TAB',
-         payload: { title: hash, path: `/users/${hash}`, history },
+         payload: { title: hash, path: `/users/${hash}` },
       })
+      history.push(`/users/${hash}`)
    }
    React.useEffect(() => {
       const tab = state.tabs.find(item => item.path === `/users`) || {}

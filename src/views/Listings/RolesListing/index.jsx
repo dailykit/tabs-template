@@ -10,8 +10,9 @@ const RolesListing = () => {
       const hash = `untitled${uuid().split('-')[0]}`
       dispatch({
          type: 'ADD_TAB',
-         payload: { title: hash, path: `/roles/${hash}`, history },
+         payload: { title: hash, path: `/roles/${hash}` },
       })
+      history.push(`/roles/${hash}`)
    }
    React.useEffect(() => {
       const tab = state.tabs.find(item => item.path === `/roles`) || {}
