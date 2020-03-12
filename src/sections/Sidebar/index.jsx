@@ -1,8 +1,7 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 
 // State
-import { Context } from '../../store/tabs'
+import { useTabs } from '../../store/tabs'
 
 // Styled
 import {
@@ -13,18 +12,9 @@ import {
 } from './styled'
 
 const Sidebar = ({ visible, toggleSidebar }) => {
-   const history = useHistory()
-   const { dispatch } = React.useContext(Context)
-   const addTab = (title, path) => {
-      toggleSidebar(!visible)
-      dispatch({
-         type: 'ADD_TAB',
-         payload: { title, path },
-      })
-      history.push(path)
-   }
+   const { addTab } = useTabs()
    return (
-      <StyledSidebar visible={visible}>
+      <StyledSidebar visible={visible} onClick={() => toggleSidebar(false)}>
          <StyledHeading>Listings</StyledHeading>
          <StyledList>
             <StyledListItem onClick={() => addTab('Roles', '/roles')}>

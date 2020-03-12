@@ -1,22 +1,20 @@
 import React from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
-import { Context } from '../../../store/tabs'
-
-import doesTabExists from '../../../utils/doesTabExists'
+import { useTabs } from '../../../store/tabs'
 
 const RoleForm = () => {
    const params = useParams()
    const history = useHistory()
    const [data, setData] = React.useState({})
-   const { state } = React.useContext(Context)
+   const { tabs, doesTabExists } = useTabs()
    React.useEffect(() => {
-      const tab = doesTabExists(state.tabs, `/roles/${params.name}`)
+      const tab = doesTabExists(`/roles/${params.name}`)
       if (Object.prototype.hasOwnProperty.call(tab, 'path')) {
          return setData(tab)
       }
       return history.push('/roles')
-   }, [state.tabs, params.name, history])
+   }, [tabs, params.name, history, doesTabExists])
    return (
       <div>
          <h1>Role Form</h1>

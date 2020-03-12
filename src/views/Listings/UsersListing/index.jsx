@@ -1,29 +1,25 @@
 import React from 'react'
 import { v4 as uuid } from 'uuid'
 import { useHistory } from 'react-router-dom'
-import { Context } from '../../../store/tabs'
+import { useTabs } from '../../../store/tabs'
 
 const UsersListing = () => {
    const history = useHistory()
-   const { state, dispatch } = React.useContext(Context)
-   const addTab = () => {
+   const { tabs, addTab } = useTabs()
+   const createTab = () => {
       const hash = `untitled${uuid().split('-')[0]}`
-      dispatch({
-         type: 'ADD_TAB',
-         payload: { title: hash, path: `/users/${hash}` },
-      })
-      history.push(`/users/${hash}`)
+      addTab(hash, `/users/${hash}`)
    }
    React.useEffect(() => {
-      const tab = state.tabs.find(item => item.path === `/users`) || {}
+      const tab = tabs.find(item => item.path === `/users`) || {}
       if (!Object.prototype.hasOwnProperty.call(tab, 'path')) {
          history.push('/')
       }
-   }, [history, state.tabs])
+   }, [history, tabs])
    return (
       <div>
          <h1>Users Listing</h1>
-         <button type="button" onClick={() => addTab()}>
+         <button type="button" onClick={() => createTab()}>
             New Form
          </button>
       </div>
