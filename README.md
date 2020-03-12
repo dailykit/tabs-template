@@ -44,3 +44,47 @@ For each listing/form page you'll have to create `Route` component for that path
    <RoleForm /> // Form page to render at that path
 </Route>
 ```
+
+### Adding Authentication
+
+To add authentication to your app, follow the following steps:
+
+1. Wrap your app with `AuthProvider`
+
+```js
+import { AuthProvider } from './store/auth'
+
+ReactDOM.render(
+   <AuthProvider>
+      <App />
+   </AuthProvider>,
+   document.getElementById('root')
+)
+```
+
+2. To access user profile, methods like login, logout etc, use the hook `useAuth`
+
+```js
+import { useAuth } from './store/auth'
+
+const App = () => {
+   const { isAuthenticated, isInitialized } = useAuth()
+
+   if (isInitialized === false) return <Loader />
+   if (isAuthenticated === false) return "You're not logged in!"
+   return <StyledWrapper>{/* You're app code */}</StyledWrapper>
+}
+```
+
+3. `useAuth` hook gives you access to following methods and booleans
+
+| props           | type     | description                                      |
+| :-------------- | :------- | :----------------------------------------------- |
+| user            | Object   | Contains user's profile details                  |
+| login           | Function | Method to initiate login                         |
+| logout          | Function | Method to logout user and redirect to login page |
+| clearToken      | Function | Method to clear stored tokens                    |
+| updateToken     | Function | Method to update the token                       |
+| isInitialized   | Boolean  | Check whether keycloak is initiliazed or not     |
+| isTokenExpired  | Boolean  | Check whether the token is expired or not        |
+| isAuthenticated | Boolean  | Check if the user is authenticated or not        |
