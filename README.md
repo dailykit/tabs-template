@@ -88,3 +88,42 @@ const App = () => {
 | isInitialized   | Boolean  | Check whether keycloak is initiliazed or not     |
 | isTokenExpired  | Boolean  | Check whether the token is expired or not        |
 | isAuthenticated | Boolean  | Check if the user is authenticated or not        |
+
+
+### Using Tabs
+Follow the following steps to add tabs functionality to your app.
+
+1. Import `TabProvider` and wrap your app with it.
+```js
+import { TabProvider } from './store/tabs'
+
+ReactDOM.render(
+    <TabProvider>
+       <App />
+    </TabProvider>
+   document.getElementById('root')
+)
+```
+
+2. Using `useTabs` hook
+```js
+import { useTabs } from '../../store/tabs'
+const App = () => {
+  const { tabs, addTab } = useTabs()
+  return (
+    <div>
+      <button onClick={() => addTab('Roles', '/roles')}>Add Tab</button>
+    </div>
+  )
+}
+```
+
+3. `useTabs` hook gives you access to following props:
+
+| props         | type           | description                     |
+| :------------ | :------------- | :------------------------------ |
+| tabs          | Array<Object\> | List of all tabs                |
+| addTab        | Function       | Use this method to add tab      |
+| switchTab     | Function       | Use this method to switchTab    |
+| removeTab     | Function       | Method to remove a tab          |
+| doesTabExists | Function       | Method to check if a tab exists |
