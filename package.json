@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@dailykit/ui": "^0.6.65",
+    "@react-keycloak/web": "^1.0.4",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^10.0.0",
+    "keycloak-js": "^9.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "5.1.2",
