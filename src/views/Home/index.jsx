@@ -5,6 +5,8 @@ import { useAuth } from '../../store/auth'
 
 import { FETCH_USER } from '../../graphql'
 
+import { StyledSection } from './styled'
+
 const Home = () => {
    const { user } = useAuth()
    const [organization, setOrganization] = React.useState(null)
@@ -32,11 +34,12 @@ const Home = () => {
    if (loading) return <div>Loading...</div>
    return (
       <div>
-         <section>
-            Hello, {user.firstName} {user.lastName}
-            <br />
-            Organization: {organization?.name}
-         </section>
+         <StyledSection>
+            <h2>
+               Hello, {user.firstName} {user.lastName}
+            </h2>
+            <span>Organization: {organization?.name}</span>
+         </StyledSection>
       </div>
    )
 }
