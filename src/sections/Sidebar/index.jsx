@@ -17,9 +17,6 @@ const Sidebar = ({ visible, toggleSidebar }) => {
       <StyledSidebar visible={visible} onClick={() => toggleSidebar(false)}>
          <StyledHeading>Listings</StyledHeading>
          <StyledList>
-            <StyledListItem onClick={() => addTab('Roles', '/roles')}>
-               Roles
-            </StyledListItem>
             <StyledListItem onClick={() => addTab('Users', '/users')}>
                Users
             </StyledListItem>

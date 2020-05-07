@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledHeader = styled.header`
-   background: #d9e9f1;
+   background: #04a777;
    display: flex;
 `
 
@@ -14,13 +14,13 @@ export const StyledMenu = styled.div`
    justify-content: center;
    :hover,
    :focus {
-      background: #fff;
+      background: #048e65;
    }
 `
 
 export const StyledNav = styled.div`
    display: flex;
-   border-left: 1px solid #b4d5e6;
+   border-left: 1px solid #048e65;
    button {
       width: 40px;
       height: 40px;
@@ -29,7 +29,7 @@ export const StyledNav = styled.div`
       background: transparent;
       :hover,
       :focus {
-         background: #fff;
+         background: #048e65;
       }
    }
 `

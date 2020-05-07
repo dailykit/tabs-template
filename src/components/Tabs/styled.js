@@ -2,19 +2,20 @@ import styled, { css } from 'styled-components'
 
 export const StyledTabs = styled.ul`
    display: flex;
-   border-left: 1px solid #b4d5e6;
+   border-left: 1px solid #048e65;
 `
 
 export const StyledTab = styled.li(
    ({ active }) => css`
+      color: #fff;
       width: 220px;
       height: 40px;
       display: grid;
       cursor: pointer;
       align-items: center;
       grid-template-columns: 1fr 40px;
-      background: ${active ? '#fff' : 'transparent'};
-      border-right: 1px solid #b4d5e6;
+      background: ${active ? '#048e65' : 'transparent'};
+      border-right: 1px solid #048e65;
       span {
          padding-left: 12px;
       }
@@ -24,7 +25,7 @@ export const StyledTab = styled.li(
          align-items: center;
          justify-content: center;
          :hover {
-            background: #f5f5f5;
+            background: #037b58;
          }
       }
    `

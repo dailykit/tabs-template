@@ -23,7 +23,7 @@ const Header = ({ toggleSidebar }) => {
                e.charCode === 32 && toggleSidebar(visible => !visible)
             }
          >
-            <MenuIcon color="#000" size="24" />
+            <MenuIcon color="#fff" size="24" />
          </StyledMenu>
          <StyledNav>
             <button
@@ -31,14 +31,14 @@ const Header = ({ toggleSidebar }) => {
                title="Go Back"
                onClick={() => history.goBack()}
             >
-               <LeftIcon color="#000" size="22" />
+               <LeftIcon color="#fff" size="22" />
             </button>
             <button
                type="button"
                title="Go Foreward"
                onClick={() => history.goForward()}
             >
-               <RightIcon color="#000" size="22" />
+               <RightIcon color="#fff" size="22" />
             </button>
          </StyledNav>
          <Tabs />
