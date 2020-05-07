@@ -9,6 +9,7 @@ import { AuthProvider } from './store/auth'
 import { TabProvider } from './store/tabs'
 
 import './index.css'
+import './styles.css'
 
 const client = new ApolloClient({
    uri: process.env.REACT_APP_DAILYCLOAK_URL,
