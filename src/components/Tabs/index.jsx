@@ -2,18 +2,16 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useTabs } from '../../store/tabs'
-import {useWindowSize} from '../../utils/hooks'
 import { StyledTabs, StyledTab, Dropdown, Button } from './styled'
 import { CloseIcon, ChevronDownIcon, ChevronUpIcon } from '../../assets/icons'
 
 const Tabs = () => {
-   const view  = useWindowSize()
-   const { tabs, isDropdownOpen, toggleDropdown } = useTabs()
+   const { visibleTabs = [], hiddenTabs = [], isDropdownOpen, toggleDropdown } = useTabs()
 
    return (
       <>
          <StyledTabs>
-            {tabs.slice(0, Math.floor(view.width / 280)).map((tab, index) => (
+            {visibleTabs.map((tab, index) => (
                <Tab key={tab.path} tab={tab} index={index} />
             ))}
          </StyledTabs>
@@ -23,10 +21,8 @@ const Tabs = () => {
          {isDropdownOpen && (
             <Dropdown>
                <ul>
-                  {tabs.slice(Math.floor(view.width / 280)).length > 0 ? (
-                     tabs
-                        .slice(Math.floor(view.width / 280))
-                        .map((tab, index) => (
+                  {hiddenTabs.length > 0 ? (
+                     hiddenTabs.map((tab, index) => (
                            <Tab
                               tab={tab}
                               index={index}

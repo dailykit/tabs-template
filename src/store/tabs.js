@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
+import { useWindowSize } from '../utils/hooks'
 
 const Context = React.createContext()
 
@@ -57,6 +58,7 @@ export const TabProvider = ({ children }) => {
 
 export const useTabs = () => {
    const history = useHistory()
+   const view = useWindowSize()
    const location = useLocation()
 
    const {
@@ -88,6 +90,9 @@ export const useTabs = () => {
 
    const switchTab = path => history.push(path)
 
+   const visibleTabs = tabs.slice(0, Math.floor(view.width / 280))
+   const hiddenTabs = tabs.slice(Math.floor(view.width / 280))
+
    const removeTab = React.useCallback(({ tab, index }) => {
       dispatch({ type: 'DELETE_TAB', payload: { tab, index } })
 
@@ -112,6 +117,8 @@ export const useTabs = () => {
       addTab,
       switchTab,
       removeTab,
+      visibleTabs,
+      hiddenTabs,
       setTabTitle,
       isDropdownOpen,
       toggleDropdown
