@@ -1,26 +1,22 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { useTabs } from '../../../store/tabs'
 
-const UserFomr = () => {
+const UserForm = () => {
    const params = useParams()
-   const history = useHistory()
-   const [data, setData] = React.useState({})
-   const { tabs, doesTabExists } = useTabs()
+   const { tab, addTab } = useTabs()
    React.useEffect(() => {
-      const tab = doesTabExists(`/users/${params.name}`)
-      if (Object.prototype.hasOwnProperty.call(tab, 'path')) {
-         return setData(tab)
+      if (!tab) {
+         addTab(params.name, `/users/${params.name}`)
       }
-      return history.push('/users')
-   }, [tabs, params.name, history, doesTabExists])
+   }, [tab, addTab, params.name])
    return (
       <div>
          <h1>User Form</h1>
-         <span>{data.title}</span>
+         <span>{params.name}</span>
       </div>
    )
 }
 
-export default UserFomr
+export default UserForm

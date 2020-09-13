@@ -1,21 +1,18 @@
 import React from 'react'
 import { v4 as uuid } from 'uuid'
-import { useHistory } from 'react-router-dom'
 import { useTabs } from '../../../store/tabs'
 
 const UsersListing = () => {
-   const history = useHistory()
-   const { tabs, addTab } = useTabs()
+   const { tab, addTab } = useTabs()
    const createTab = () => {
       const hash = `untitled${uuid().split('-')[0]}`
       addTab(hash, `/users/${hash}`)
    }
    React.useEffect(() => {
-      const tab = tabs.find(item => item.path === `/users`) || {}
-      if (!Object.prototype.hasOwnProperty.call(tab, 'path')) {
-         history.push('/')
+      if (!tab) {
+         addTab('Users', '/users')
       }
-   }, [history, tabs])
+   }, [tab, addTab])
    return (
       <div>
          <h1>Users Listing</h1>

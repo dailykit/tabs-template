@@ -64,7 +64,7 @@ export const useTabs = () => {
 
    const tab = tabs.find(tab => tab.path === location.pathname)
 
-   const setTabTitle = title => {
+   const setTabTitle = React.useCallback(title => {
       dispatch({
          type: 'SET_TITLE',
          payload: {
@@ -72,19 +72,19 @@ export const useTabs = () => {
             path: tab.path,
          },
       })
-   }
+   },[tab, dispatch])
 
-   const addTab = (title, path) => {
+   const addTab = React.useCallback((title, path) => {
       dispatch({
          type: 'ADD_TAB',
          payload: { title, path },
       })
       history.push(path)
-   }
+   },[history, dispatch])
 
    const switchTab = path => history.push(path)
 
-   const removeTab = ({ tab, index }) => {
+   const removeTab = React.useCallback(({ tab, index }) => {
       dispatch({ type: 'DELETE_TAB', payload: { tab, index } })
 
       const tabsCount = tabs.length
@@ -100,9 +100,7 @@ export const useTabs = () => {
       else if (index > 0 && tabsCount > 1) {
          history.push(tabs[index - 1].path)
       }
-   }
-
-   const doesTabExists = path => tabs.find(tab => tab.path === path) || false
+   }, [history, dispatch, tabs])
 
    return {
       tab,
@@ -111,6 +109,5 @@ export const useTabs = () => {
       switchTab,
       removeTab,
       setTabTitle,
-      doesTabExists,
    }
 }
