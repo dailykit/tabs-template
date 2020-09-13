@@ -1,20 +1,15 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 
-// State
 import { useTabs } from '../../store/tabs'
-
-// Styled
-import { StyledTabs, StyledTab } from './styled'
-
-// Icons
 import { CloseIcon } from '../../assets/icons'
+import { StyledTabs, StyledTab } from './styled'
 
 const Tabs = () => {
    const location = useLocation()
    const { tabs, switchTab, removeTab } = useTabs()
    return (
-      <StyledTabs>
+      <StyledTabs  >
          {tabs.map((tab, index) => (
             <StyledTab
                key={tab.title}

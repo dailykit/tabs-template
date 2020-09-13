@@ -1,39 +1,20 @@
-import {css} from '@emotion/core'
+import tw, {css} from 'twin.macro'
 import styled from '@emotion/styled'
 
 export const StyledSidebar = styled.aside(
    ({ visible }) => css`
+      ${tw`bottom-0 absolute left-0 bg-gray-900 text-white`}
       top: 40px;
-      bottom: 0;
       width: 240px;
-      position: absolute;
-      background: #d9e9f1;
-      left: 0;
       transition: 0.3s ease-in-out;
       transform: translateX(${visible ? '0' : '-240px'});
    `
 )
 
-export const StyledHeading = styled.h3`
-   color: #76acc7;
-   font-size: 16px;
-   font-weight: 500;
-   padding: 18px 12px 8px 12px;
-   letter-spacing: 0.4px;
-   text-transform: uppercase;
-`
-
 export const StyledList = styled.ul`
-   padding: 0 12px;
+   ${tw`p-2 space-y-1`}
 `
 
 export const StyledListItem = styled.li`
-   height: 40px;
-   display: flex;
-   cursor: pointer;
-   align-items: center;
-   border-bottom: 1px solid #b4d5e6;
-   :hover {
-      border-bottom: 1px solid #66a1bd;
-   }
+   ${tw`px-3 h-10 flex cursor-pointer items-center rounded hover:bg-gray-800`}
 `

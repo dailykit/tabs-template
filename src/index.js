@@ -7,6 +7,7 @@ import { AuthProvider } from './store/auth'
 import { TabProvider } from './store/tabs'
 
 import './index.css'
+import 'tailwindcss/dist/base.min.css'
 
 ReactDOM.render(
    <AuthProvider>

@@ -1,35 +1,17 @@
+import tw from 'twin.macro'
 import styled from '@emotion/styled'
 
 export const StyledHeader = styled.header`
-   background: #d9e9f1;
-   display: flex;
+   ${tw`flex bg-blue-200`}
 `
 
 export const StyledMenu = styled.div`
-   width: 40px;
-   height: 40px;
-   display: flex;
-   cursor: pointer;
-   align-items: center;
-   justify-content: center;
-   :hover,
-   :focus {
-      background: #fff;
-   }
+   ${tw`w-10 h-10 flex items-center justify-center cursor-pointer hover:bg-white focus:bg-white`}
 `
 
 export const StyledNav = styled.div`
-   display: flex;
-   border-left: 1px solid #b4d5e6;
+   ${tw`flex border-l border-r border-blue-300`}
    button {
-      width: 40px;
-      height: 40px;
-      border: none;
-      cursor: pointer;
-      background: transparent;
-      :hover,
-      :focus {
-         background: #fff;
-      }
+      ${tw`h-10 w-10 border-0 flex items-center justify-center cursor-pointer bg-transparent hover:bg-white focus:bg-white`}
    }
 `
