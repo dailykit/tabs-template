@@ -5,8 +5,11 @@ export const StyledHeader = styled.header`
    ${tw`flex bg-blue-200`}
 `
 
-export const StyledMenu = styled.div`
-   ${tw`w-10 h-10 flex items-center justify-center cursor-pointer hover:bg-white focus:bg-white`}
+export const StyledButton = styled.button`
+   ${tw`w-10 h-10 flex border-l border-blue-300 items-center justify-center hover:bg-white focus:bg-white`}
+   svg {
+      ${tw`stroke-current`}
+   }
 `
 
 export const StyledNav = styled.div`

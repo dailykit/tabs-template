@@ -1,30 +1,28 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-// Components
 import { Tabs } from '../../components'
-
-// Styled
-import { StyledHeader, StyledMenu, StyledNav } from './styled'
-
-// Icons
-import { MenuIcon, LeftIcon, RightIcon } from '../../assets/icons'
+import { useTabs } from '../../store/tabs'
+import { StyledHeader, StyledButton, StyledNav } from './styled'
+import { MenuIcon, LeftIcon, RightIcon, HomeIcon } from '../../assets/icons'
 
 const Header = ({ toggleSidebar }) => {
    const history = useHistory()
+   const {switchTab} = useTabs()
    return (
       <StyledHeader>
-         <StyledMenu
+         <StyledButton
             title="Menu"
-            tabIndex="0"
-            role="button"
             onClick={() => toggleSidebar(visible => !visible)}
-            onKeyPress={e =>
-               e.charCode === 32 && toggleSidebar(visible => !visible)
-            }
          >
             <MenuIcon color="#000" size="24" />
-         </StyledMenu>
+         </StyledButton>
+         <StyledButton
+            title="Home"
+            onClick={() => switchTab('/')}
+         >
+            <HomeIcon size="20" />
+         </StyledButton>
          <StyledNav>
             <button
                type="button"

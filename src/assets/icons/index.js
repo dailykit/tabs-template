@@ -5,5 +5,6 @@ import RightIcon from './Right'
 
 export { MenuIcon, CloseIcon, LeftIcon, RightIcon }
 
+export * from './Home'
 export * from './ChevronUp'
 export * from './ChevronDown'
