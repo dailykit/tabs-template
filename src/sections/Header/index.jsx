@@ -8,34 +8,28 @@ import { MenuIcon, LeftIcon, RightIcon, HomeIcon } from '../../assets/icons'
 
 const Header = ({ toggleSidebar }) => {
    const history = useHistory()
-   const {switchTab} = useTabs()
+   const { switchTab } = useTabs()
    return (
       <StyledHeader>
          <StyledButton
             title="Menu"
-            onClick={() => toggleSidebar(visible => !visible)}
-         >
+            onClick={() => toggleSidebar(visible => !visible)}>
             <MenuIcon color="#000" size="24" />
          </StyledButton>
-         <StyledButton
-            title="Home"
-            onClick={() => switchTab('/')}
-         >
+         <StyledButton title="Home" onClick={() => switchTab('/')}>
             <HomeIcon size="20" />
          </StyledButton>
          <StyledNav>
             <button
                type="button"
                title="Go Back"
-               onClick={() => history.goBack()}
-            >
+               onClick={() => history.goBack()}>
                <LeftIcon color="#000" size="22" />
             </button>
             <button
                type="button"
                title="Go Foreward"
-               onClick={() => history.goForward()}
-            >
+               onClick={() => history.goForward()}>
                <RightIcon color="#000" size="22" />
             </button>
          </StyledNav>

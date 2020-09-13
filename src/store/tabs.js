@@ -40,7 +40,8 @@ const reducers = (state, { type, payload }) => {
             tabs: state.tabs.filter((_, index) => index !== payload.index),
          }
       }
-      case 'TOGGLE_DROPDOWN': return {...state, isDropdownOpen: payload}
+      case 'TOGGLE_DROPDOWN':
+         return { ...state, isDropdownOpen: payload }
       default:
          return state
    }
@@ -66,50 +67,60 @@ export const useTabs = () => {
       dispatch,
    } = React.useContext(Context)
 
-   const tab = tabs.find(tab => tab.path === location.pathname)
+   const tab = tabs.find(node => node.path === location.pathname)
 
-   const toggleDropdown = (value) => dispatch({type: 'TOGGLE_DROPDOWN', payload:value})
+   const toggleDropdown = value =>
+      dispatch({ type: 'TOGGLE_DROPDOWN', payload: value })
 
-   const setTabTitle = React.useCallback(title => {
-      dispatch({
-         type: 'SET_TITLE',
-         payload: {
-            title,
-            path: tab.path,
-         },
-      })
-   },[tab, dispatch])
+   const setTabTitle = React.useCallback(
+      title => {
+         dispatch({
+            type: 'SET_TITLE',
+            payload: {
+               title,
+               path: tab.path,
+            },
+         })
+      },
+      [tab, dispatch]
+   )
 
-   const addTab = React.useCallback((title, path) => {
-      dispatch({
-         type: 'ADD_TAB',
-         payload: { title, path },
-      })
-      history.push(path)
-   },[history, dispatch])
+   const addTab = React.useCallback(
+      (title, path) => {
+         dispatch({
+            type: 'ADD_TAB',
+            payload: { title, path },
+         })
+         history.push(path)
+      },
+      [history, dispatch]
+   )
 
    const switchTab = path => history.push(path)
 
    const visibleTabs = tabs.slice(0, Math.floor(view.width / 280))
    const hiddenTabs = tabs.slice(Math.floor(view.width / 280))
 
-   const removeTab = React.useCallback(({ tab, index }) => {
-      dispatch({ type: 'DELETE_TAB', payload: { tab, index } })
+   const removeTab = React.useCallback(
+      ({ tab: node, index }) => {
+         dispatch({ type: 'DELETE_TAB', payload: { tab: node, index } })
 
-      const tabsCount = tabs.length
-      // closing last remaining tab
-      if (index === 0 && tabsCount === 1) {
-         history.push('/')
-      }
-      // closing first tab when there's more than one tab
-      else if (index === 0 && tabsCount > 1) {
-         history.push(tabs[index + 1].path)
-      }
-      // closing any tab when there's more than one tab
-      else if (index > 0 && tabsCount > 1) {
-         history.push(tabs[index - 1].path)
-      }
-   }, [history, dispatch, tabs])
+         const tabsCount = tabs.length
+         // closing last remaining tab
+         if (index === 0 && tabsCount === 1) {
+            history.push('/')
+         }
+         // closing first tab when there's more than one tab
+         else if (index === 0 && tabsCount > 1) {
+            history.push(tabs[index + 1].path)
+         }
+         // closing any tab when there's more than one tab
+         else if (index > 0 && tabsCount > 1) {
+            history.push(tabs[index - 1].path)
+         }
+      },
+      [history, dispatch, tabs]
+   )
 
    return {
       tab,
@@ -121,6 +132,6 @@ export const useTabs = () => {
       hiddenTabs,
       setTabTitle,
       isDropdownOpen,
-      toggleDropdown
+      toggleDropdown,
    }
 }

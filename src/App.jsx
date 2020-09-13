@@ -1,5 +1,5 @@
 import React from 'react'
-import {useKeycloak} from '@react-keycloak/web'
+import { useKeycloak } from '@react-keycloak/web'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 // Sections

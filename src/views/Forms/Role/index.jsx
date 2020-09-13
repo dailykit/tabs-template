@@ -10,7 +10,7 @@ const RoleForm = () => {
    React.useEffect(() => {
       if (!tab) {
          addTab(params.name, `/roles/${params.name}`)
-      } 
+      }
    }, [tab, addTab, params.name])
 
    return (

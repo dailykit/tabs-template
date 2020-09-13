@@ -1,4 +1,4 @@
-import tw, {css} from 'twin.macro'
+import tw, { css } from 'twin.macro'
 import styled from '@emotion/styled'
 
 export const StyledTabs = styled.ul`
@@ -18,7 +18,8 @@ export const StyledTab = styled.li(
          ${tw`h-10 flex items-center justify-center hover:bg-gray-200`}
       }
       &.in_dropdown {
-         ${active && css`
+         ${active &&
+         css`
             color: #fff;
             background: ${active ? '#1a202c' : 'transparent'};
             svg {

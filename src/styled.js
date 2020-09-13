@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 export const StyledWrapper = styled.div`
    display: grid;
@@ -9,4 +9,4 @@ export const StyledWrapper = styled.div`
       overflow-y: auto;
       height: calc(100vh - 40px);
    }
-`;
+`

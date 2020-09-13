@@ -6,7 +6,12 @@ import { StyledTabs, StyledTab, Dropdown, Button } from './styled'
 import { CloseIcon, ChevronDownIcon, ChevronUpIcon } from '../../assets/icons'
 
 const Tabs = () => {
-   const { visibleTabs = [], hiddenTabs = [], isDropdownOpen, toggleDropdown } = useTabs()
+   const {
+      visibleTabs = [],
+      hiddenTabs = [],
+      isDropdownOpen,
+      toggleDropdown,
+   } = useTabs()
 
    return (
       <>
@@ -16,20 +21,24 @@ const Tabs = () => {
             ))}
          </StyledTabs>
          <Button onClick={() => toggleDropdown(!isDropdownOpen)}>
-            {isDropdownOpen ? <ChevronUpIcon size={20} /> : <ChevronDownIcon size={20} />}
+            {isDropdownOpen ? (
+               <ChevronUpIcon size={20} />
+            ) : (
+               <ChevronDownIcon size={20} />
+            )}
          </Button>
          {isDropdownOpen && (
             <Dropdown>
                <ul>
                   {hiddenTabs.length > 0 ? (
                      hiddenTabs.map((tab, index) => (
-                           <Tab
-                              tab={tab}
-                              index={index}
-                              key={tab.path}
-                              className="in_dropdown"
-                           />
-                        ))
+                        <Tab
+                           tab={tab}
+                           index={index}
+                           key={tab.path}
+                           className="in_dropdown"
+                        />
+                     ))
                   ) : (
                      <p>No tabs</p>
                   )}
@@ -54,16 +63,15 @@ const Tab = ({ index, tab, ...props }) => {
             toggleDropdown(false)
          }}
          active={tab.path === location.pathname}
-         {...props}
-      >
+         {...props}>
          <span title={tab.title}>{tab.title}</span>
          <button
+            type="button"
             title="Close Tab"
             onClick={e => {
                e.stopPropagation()
                removeTab({ tab, index })
-            }}
-         >
+            }}>
             <CloseIcon color="#000" size="20" />
          </button>
       </StyledTab>

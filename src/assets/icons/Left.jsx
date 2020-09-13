@@ -10,8 +10,7 @@ const ArrowLeft = ({ size = 16, color = '#ffffff' }) => (
       stroke={color}
       strokeWidth="1.5"
       strokeLinecap="round"
-      strokeLinejoin="round"
-   >
+      strokeLinejoin="round">
       <path d="M19 12H6M12 5l-7 7 7 7" />
    </svg>
 )

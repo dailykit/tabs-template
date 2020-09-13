@@ -4,11 +4,7 @@ import React from 'react'
 import { useTabs } from '../../store/tabs'
 
 // Styled
-import {
-   StyledSidebar,
-   StyledList,
-   StyledListItem,
-} from './styled'
+import { StyledSidebar, StyledList, StyledListItem } from './styled'
 
 const Sidebar = ({ visible, toggleSidebar }) => {
    const { addTab } = useTabs()
