@@ -1,11 +1,8 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 export const StyledWrapper = styled.div`
-   position: absolute;
-   left: 0;
-   right: 0;
-   top: 0;
-   bottom: 0;
+   height: 100%;
+   width: 100%;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -26,19 +23,19 @@ export const StyledLoader = styled.div`
       background: #95d3f3;
       animation-timing-function: cubic-bezier(0, 1, 1, 0);
    }
-   div:nth-child(1) {
+   div:nth-of-type(1) {
       left: 8px;
       animation: lds-ellipsis1 0.6s infinite;
    }
-   div:nth-child(2) {
+   div:nth-of-type(2) {
       left: 8px;
       animation: lds-ellipsis2 0.6s infinite;
    }
-   div:nth-child(3) {
+   div:nth-of-type(3) {
       left: 32px;
       animation: lds-ellipsis2 0.6s infinite;
    }
-   div:nth-child(4) {
+   div:nth-of-type(4) {
       left: 56px;
       animation: lds-ellipsis3 0.6s infinite;
    }

@@ -18,7 +18,6 @@ const AuthContext = React.createContext()
 export const AuthProvider = ({ children }) => {
    const [isAuthenticated, setIsAuthenticated] = React.useState(false)
    const [user, setUser] = React.useState({})
-   const [permissions, setPermissions] = React.useState({})
    const [isInitialized, setIsInitialized] = React.useState(false)
 
    const initialize = async () => {
@@ -26,22 +25,11 @@ export const AuthProvider = ({ children }) => {
          onLoad: 'login-required',
          promiseType: 'native',
       })
+      setIsInitialized(true)
       if (authenticated) {
-         setIsInitialized(true)
          setIsAuthenticated(authenticated)
          const profile = await keycloak.loadUserProfile()
          setUser(profile)
-
-         const { roles } = await keycloak.resourceAccess[
-            process.env.REACT_APP_KEYCLOAK_CLIENT_ID
-         ]
-         const { rolePermissions } = await keycloak.tokenParsed[
-            `${process.env.REACT_APP_KEYCLOAK_CLIENT_ID}RolePermissions`
-         ]
-         const { permissions: permissionsList } = await rolePermissions.find(
-            permission => permission.role === roles[0]
-         )
-         setPermissions(permissionsList)
       }
    }
 
@@ -51,19 +39,6 @@ export const AuthProvider = ({ children }) => {
 
    const login = () => keycloak.login()
    const logout = () => keycloak.logout()
-   const isTokenExpired = () => keycloak.isTokenExpired()
-   const updateToken = () => keycloak.updateToken()
-   const clearToken = () => keycloak.clearToken()
-
-   keycloak.onTokenExpired = () => {
-      keycloak.updateToken(5).then(refreshed => {
-         if (refreshed) {
-            // keycloak.token
-         } else {
-            keycloak.login()
-         }
-      })
-   }
 
    return (
       <AuthContext.Provider
@@ -71,11 +46,7 @@ export const AuthProvider = ({ children }) => {
             user,
             login,
             logout,
-            clearToken,
-            permissions,
-            updateToken,
             isInitialized,
-            isTokenExpired,
             isAuthenticated,
          }}
       >
