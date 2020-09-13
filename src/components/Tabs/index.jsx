@@ -10,7 +10,7 @@ const Tabs = () => {
    const { tabs } = useTabs()
    const view  = useWindowSize()
    const [isOpen, setIsOpen] = React.useState(false)
-   console.log(tabs.slice(0, Math.floor(view.width / 220)))
+
    return (
       <>
          <StyledTabs>

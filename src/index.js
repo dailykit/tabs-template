@@ -1,16 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { KeycloakProvider as AuthProvider } from '@react-keycloak/web';
 
 import App from './App'
 
-import { AuthProvider } from './store/auth'
+import { keycloak } from './lib/keycloak'
 import { TabProvider } from './store/tabs'
 
 import './index.css'
 import 'tailwindcss/dist/base.min.css'
 
 ReactDOM.render(
-   <AuthProvider>
+   <AuthProvider
+      keycloak={keycloak}
+      initConfig={{
+         onLoad: 'login-required'
+      }}
+   >
       <TabProvider>
          <App />
       </TabProvider>

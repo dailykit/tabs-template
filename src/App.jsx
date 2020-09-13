@@ -1,4 +1,5 @@
 import React from 'react'
+import {useKeycloak} from '@react-keycloak/web'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 // Sections
@@ -6,21 +7,15 @@ import Header from './sections/Header'
 import Sidebar from './sections/Sidebar'
 import Main from './sections/Main'
 
-// Components
 import { Loader } from './components'
-
-// Utils
-import { useAuth } from './store/auth'
-
-// Styled
 import { StyledWrapper } from './styled'
 
 const App = () => {
-   const { isAuthenticated, isInitialized } = useAuth()
+   const [keycloak, initialized] = useKeycloak()
    const [isSidebarVisible, toggleSidebar] = React.useState(false)
 
-   if (isInitialized === false) return <Loader />
-   if (isAuthenticated === false) return "You're not logged in!"
+   if (!initialized) return <Loader />
+   if (!keycloak.authenticated) return "You're not logged in!"
    return (
       <StyledWrapper>
          <Router>
