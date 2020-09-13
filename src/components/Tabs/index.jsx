@@ -7,21 +7,20 @@ import { StyledTabs, StyledTab, Dropdown, Button } from './styled'
 import { CloseIcon, ChevronDownIcon, ChevronUpIcon } from '../../assets/icons'
 
 const Tabs = () => {
-   const { tabs } = useTabs()
    const view  = useWindowSize()
-   const [isOpen, setIsOpen] = React.useState(false)
+   const { tabs, isDropdownOpen, toggleDropdown } = useTabs()
 
    return (
       <>
          <StyledTabs>
             {tabs.slice(0, Math.floor(view.width / 280)).map((tab, index) => (
-               <Tab key={tab.path} tab={tab} index={index}/>
+               <Tab key={tab.path} tab={tab} index={index} />
             ))}
          </StyledTabs>
-         <Button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <ChevronUpIcon size={20} /> : <ChevronDownIcon size={20} />}
+         <Button onClick={() => toggleDropdown(!isDropdownOpen)}>
+            {isDropdownOpen ? <ChevronUpIcon size={20} /> : <ChevronDownIcon size={20} />}
          </Button>
-         {isOpen && (
+         {isDropdownOpen && (
             <Dropdown>
                <ul>
                   {tabs.slice(Math.floor(view.width / 280)).length > 0 ? (
@@ -32,7 +31,6 @@ const Tabs = () => {
                               tab={tab}
                               index={index}
                               key={tab.path}
-                              setIsOpen={setIsOpen}
                               className="in_dropdown"
                            />
                         ))
@@ -48,16 +46,16 @@ const Tabs = () => {
 
 export default Tabs
 
-const Tab = ({ index, tab, setIsOpen, ...props }) => {
+const Tab = ({ index, tab, ...props }) => {
    const location = useLocation()
-   const { switchTab, removeTab } = useTabs()
+   const { switchTab, removeTab, toggleDropdown } = useTabs()
 
    return (
       <StyledTab
          key={tab.title}
          onClick={() => {
             switchTab(tab.path)
-            setIsOpen(false)
+            toggleDropdown(false)
          }}
          active={tab.path === location.pathname}
          {...props}

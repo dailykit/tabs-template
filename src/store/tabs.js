@@ -4,6 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 const Context = React.createContext()
 
 const initialState = {
+   isDropdownOpen: false,
    tabs: [],
 }
 
@@ -38,6 +39,7 @@ const reducers = (state, { type, payload }) => {
             tabs: state.tabs.filter((_, index) => index !== payload.index),
          }
       }
+      case 'TOGGLE_DROPDOWN': return {...state, isDropdownOpen: payload}
       default:
          return state
    }
@@ -58,11 +60,13 @@ export const useTabs = () => {
    const location = useLocation()
 
    const {
-      state: { tabs },
+      state: { tabs, isDropdownOpen },
       dispatch,
    } = React.useContext(Context)
 
    const tab = tabs.find(tab => tab.path === location.pathname)
+
+   const toggleDropdown = (value) => dispatch({type: 'TOGGLE_DROPDOWN', payload:value})
 
    const setTabTitle = React.useCallback(title => {
       dispatch({
@@ -109,5 +113,7 @@ export const useTabs = () => {
       switchTab,
       removeTab,
       setTabTitle,
+      isDropdownOpen,
+      toggleDropdown
    }
 }
