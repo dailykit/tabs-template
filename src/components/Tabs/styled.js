@@ -10,7 +10,7 @@ export const StyledTab = styled.li(
       width: 220px;
       grid-template-columns: 1fr 40px;
       background: ${active ? '#fff' : 'transparent'};
-      ${tw`h-10 grid cursor-pointer items-center border-r border-blue-300`}
+      ${tw`h-10 grid cursor-pointer items-center border-r border-blue-300 hover:bg-gray-200`}
       span {
          ${tw`pl-3 truncate`}
       }

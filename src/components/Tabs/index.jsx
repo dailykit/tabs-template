@@ -7,11 +7,11 @@ import { CloseIcon, ChevronDownIcon, ChevronUpIcon } from '../../assets/icons'
 
 const Tabs = () => {
    const {
-      visibleTabs = [],
-      hiddenTabs = [],
+      tabs,
       closeAllTabs,
       isDropdownOpen,
       toggleDropdown,
+      visibleTabs = [],
    } = useTabs()
 
    return (
@@ -31,7 +31,7 @@ const Tabs = () => {
          {isDropdownOpen && (
             <Dropdown onClick={() => toggleDropdown(false)}>
                <ul>
-                  {hiddenTabs.map((tab, index) => (
+                  {tabs.map((tab, index) => (
                      <Tab
                         tab={tab}
                         index={index}

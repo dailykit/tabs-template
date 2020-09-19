@@ -109,7 +109,6 @@ export const useTabs = () => {
    const switchTab = React.useCallback(path => history.push(path), [history])
 
    const visibleTabs = tabs.slice(0, Math.floor(view.width / 280))
-   const hiddenTabs = tabs.slice(Math.floor(view.width / 280))
 
    const removeTab = React.useCallback(
       ({ tab: node, index }) => {
@@ -144,7 +143,6 @@ export const useTabs = () => {
       switchTab,
       removeTab,
       visibleTabs,
-      hiddenTabs,
       setTabTitle,
       closeAllTabs,
       isDropdownOpen,
