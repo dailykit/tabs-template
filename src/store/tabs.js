@@ -42,6 +42,11 @@ const reducers = (state, { type, payload }) => {
       }
       case 'TOGGLE_DROPDOWN':
          return { ...state, isDropdownOpen: payload }
+      case 'CLOSE_ALL_TABS':
+         return {
+            ...state,
+            tabs: [],
+         }
       default:
          return state
    }
@@ -69,8 +74,10 @@ export const useTabs = () => {
 
    const tab = tabs.find(node => node.path === location.pathname)
 
-   const toggleDropdown = value =>
-      dispatch({ type: 'TOGGLE_DROPDOWN', payload: value })
+   const toggleDropdown = React.useCallback(
+      value => dispatch({ type: 'TOGGLE_DROPDOWN', payload: value }),
+      [dispatch]
+   )
 
    const setTabTitle = React.useCallback(
       title => {
@@ -122,6 +129,11 @@ export const useTabs = () => {
       [history, dispatch, tabs]
    )
 
+   const closeAllTabs = React.useCallback(() => {
+      dispatch({ type: 'CLOSE_ALL_TABS' })
+      switchTab('/')
+   }, [switchTab, dispatch])
+
    return {
       tab,
       tabs,
@@ -131,6 +143,7 @@ export const useTabs = () => {
       visibleTabs,
       hiddenTabs,
       setTabTitle,
+      closeAllTabs,
       isDropdownOpen,
       toggleDropdown,
    }

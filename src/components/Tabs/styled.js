@@ -58,3 +58,7 @@ export const Dropdown = styled.div`
       ${tw`h-10 flex items-center px-3`}
    }
 `
+
+export const CloseAll = styled.button`
+   ${tw`w-full h-10 px-3 grid text-left cursor-pointer items-center hover:(text-white bg-red-500)`}
+`

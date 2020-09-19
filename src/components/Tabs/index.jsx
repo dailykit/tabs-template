@@ -2,20 +2,21 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useTabs } from '../../store/tabs'
-import { StyledTabs, StyledTab, Dropdown, Button } from './styled'
+import { StyledTabs, StyledTab, Dropdown, Button, CloseAll } from './styled'
 import { CloseIcon, ChevronDownIcon, ChevronUpIcon } from '../../assets/icons'
 
 const Tabs = () => {
    const {
       visibleTabs = [],
       hiddenTabs = [],
+      closeAllTabs,
       isDropdownOpen,
       toggleDropdown,
    } = useTabs()
 
    return (
       <>
-         <StyledTabs>
+         <StyledTabs onClick={() => toggleDropdown(false)}>
             {visibleTabs.map((tab, index) => (
                <Tab key={tab.path} tab={tab} index={index} />
             ))}
@@ -28,21 +29,20 @@ const Tabs = () => {
             )}
          </Button>
          {isDropdownOpen && (
-            <Dropdown>
+            <Dropdown onClick={() => toggleDropdown(false)}>
                <ul>
-                  {hiddenTabs.length > 0 ? (
-                     hiddenTabs.map((tab, index) => (
-                        <Tab
-                           tab={tab}
-                           index={index}
-                           key={tab.path}
-                           className="in_dropdown"
-                        />
-                     ))
-                  ) : (
-                     <p>No tabs</p>
-                  )}
+                  {hiddenTabs.map((tab, index) => (
+                     <Tab
+                        tab={tab}
+                        index={index}
+                        key={tab.path}
+                        className="in_dropdown"
+                     />
+                  ))}
                </ul>
+               <CloseAll type="button" onClick={closeAllTabs}>
+                  Close all tabs
+               </CloseAll>
             </Dropdown>
          )}
       </>
@@ -53,15 +53,12 @@ export default Tabs
 
 const Tab = ({ index, tab, ...props }) => {
    const location = useLocation()
-   const { switchTab, removeTab, toggleDropdown } = useTabs()
+   const { switchTab, removeTab } = useTabs()
 
    return (
       <StyledTab
          key={tab.title}
-         onClick={() => {
-            switchTab(tab.path)
-            toggleDropdown(false)
-         }}
+         onClick={() => switchTab(tab.path)}
          active={tab.path === location.pathname}
          {...props}>
          <span title={tab.title}>{tab.title}</span>
