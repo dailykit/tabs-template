@@ -24,14 +24,17 @@ const reducers = (state, { type, payload }) => {
          }
       }
       case 'ADD_TAB': {
-         const tabExists = state.tabs.find(tab => tab.path === payload.path)
-         if (tabExists) {
-            return state
+         const tabIndex = state.tabs.findIndex(tab => tab.path === payload.path)
+         if (tabIndex === -1) {
+            return {
+               ...state,
+               tabs: [
+                  { title: payload.title, path: payload.path },
+                  ...state.tabs,
+               ],
+            }
          }
-         return {
-            ...state,
-            tabs: [...state.tabs, { title: payload.title, path: payload.path }],
-         }
+         return state
       }
       // Delete Tab
       case 'DELETE_TAB': {
@@ -103,7 +106,7 @@ export const useTabs = () => {
       [history, dispatch]
    )
 
-   const switchTab = path => history.push(path)
+   const switchTab = React.useCallback(path => history.push(path), [history])
 
    const visibleTabs = tabs.slice(0, Math.floor(view.width / 280))
    const hiddenTabs = tabs.slice(Math.floor(view.width / 280))
